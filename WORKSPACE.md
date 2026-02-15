@@ -1,2 +1,2 @@
 ## Architecture
-Canonical system wiki: ../vizion-platform/docs/architecture/README.md
+Canonical system wiki: ../vizion-infra/wiki/index.md
