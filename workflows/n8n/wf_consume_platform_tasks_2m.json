@@ -1,0 +1,24 @@
+{
+  "name": "wf_consume_platform_tasks_2m",
+  "nodes": [
+    {
+      "parameters": {"rule": {"interval": [{"field": "minutes", "minutesInterval": 2}] }},
+      "id": "cron",
+      "name": "Every 2m",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [300, 200]
+    },
+    {
+      "parameters": {"command": "cd /root/VizionAI/WORKSPACES/vizion-agent-builder && ./scripts/consume_platform_tasks.sh"},
+      "id": "exec",
+      "name": "Consume Tasks",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [540, 200]
+    }
+  ],
+  "connections": {"Every 2m": {"main": [[{"node": "Consume Tasks", "type": "main", "index": 0}]]}},
+  "active": false,
+  "settings": {"executionOrder": "v1"}
+}
