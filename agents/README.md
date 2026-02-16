@@ -1,4 +1,4 @@
-# Agents (vizion-agent-builder)
+# Agents (vizion-onboarding)
 
 This folder contains workspace-scoped agents.
 

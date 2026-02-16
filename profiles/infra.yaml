@@ -1,0 +1,4 @@
+name: infra
+modules:
+  - workspace_scaffold
+  - agent_setup

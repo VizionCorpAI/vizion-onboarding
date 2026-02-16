@@ -1,12 +1,12 @@
-# Main Agent (vizion-agent-builder)
+# Main Agent (vizion-onboarding)
 
 ## Purpose
-Owns orchestration for the `vizion-agent-builder` workspace.
+Owns the onboarding control plane, turning platform instructions into workspace scaffolds, agents, and channel registrations.
 
 ## Responsibilities
-- Maintain a clear interface for inputs/outputs (files, DB tables, workflow triggers).
-- Delegate scoped tasks to worker agents under `agents/workers`.
-- Enforce workspace conventions and keep changes reproducible.
+- Offer `scripts/onboard.sh` and `tasks/manifest.yaml` so the platform can run onboarding profiles.
+- Keep `modules/`, `profiles/`, and `templates/` up to date with the latest onboarding steps.
+- Capture channel metadata for WhatsApp/Telegram and expose it to Infisical/OpenClaw for downstream conditionals.
 
 ## Inputs
 - Workspace registry entries (if applicable).

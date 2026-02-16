@@ -1,0 +1,5 @@
+name: default
+modules:
+  - workspace_scaffold
+  - agent_setup
+  - channel_setup

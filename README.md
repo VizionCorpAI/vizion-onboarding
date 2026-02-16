@@ -1,14 +1,16 @@
-# vizion-agent-builder
+# vizion-onboarding
 
-Workspace repository for **agent-builder** domain.
+Workspace control plane for onboarding workflows, agents, channels, and infrastructure catalogs.
 
 ## Structure
-- agents/: OpenClaw agents for this workspace
-- workflows/: n8n workflow exports and docs
-- infra/sql/: DB migrations and workspace tables
-- config/: environment templates
-- scripts/: automation scripts
+- `modules/`: atomic onboarding steps (workspace scaffolding, agent generation, channel seeding).
+- `profiles/`: module compositions (default, infra-only, client-channel deploys).
+- `templates/`: scaffolding for agents, workspaces, and n8n workflows.
+- `tasks/manifest.yaml`: declares onboarding tasks/load order.
+- `scripts/`: orchestrators (e.g., `onboard.sh`) and module helpers.
+- `workflows/n8n/`: webhook-driven flows that trigger onboarding via platform.
+- `agents/`, `infra/`, `config/`, `state/`: supporting artifacts (unchanged).
 
 ## Alignment Keys
-- workspace_key: agent-builder
-- workflow_namespace: agent-builder
+- workspace_key: onboarding
+- workflow_namespace: onboarding

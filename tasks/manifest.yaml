@@ -1,0 +1,23 @@
+profiles:
+  - name: default
+    description: Standard onboarding profile
+    modules:
+      - workspace_scaffold
+      - agent_setup
+      - channel_setup
+  - name: infra
+    description: Infrastructure-only profile
+    modules:
+      - workspace_scaffold
+      - agent_setup
+modules:
+  - name: workspace_scaffold
+    description: Scaffold folders and README
+  - name: agent_setup
+    description: Generate agent skeletons and docs
+  - name: channel_setup
+    description: Seed channel contact data
+tasks:
+  - key: onboard_client
+    description: Run selected onboarding profile.
+    profile: default

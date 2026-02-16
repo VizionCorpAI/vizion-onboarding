@@ -10,7 +10,7 @@
       "position": [300, 200]
     },
     {
-      "parameters": {"command": "cd /root/VizionAI/WORKSPACES/vizion-agent-builder && ./scripts/consume_platform_tasks.sh"},
+      "parameters": {"command": "cd /root/VizionAI/WORKSPACES/vizion-onboarding && ./scripts/consume_platform_tasks.sh"},
       "id": "exec",
       "name": "Consume Tasks",
       "type": "n8n-nodes-base.executeCommand",

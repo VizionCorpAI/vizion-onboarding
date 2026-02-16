@@ -1,0 +1,3 @@
+name: workspace_scaffold
+description: Scaffold workspace folders (agents, docs, infra) and apply basic metadata.
+script: scripts/module_workspace_scaffold.sh
