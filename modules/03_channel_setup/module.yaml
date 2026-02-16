@@ -1,3 +1,0 @@
-name: channel_setup
-description: Register channel contacts (WhatsApp, Telegram) via Infisical secrets and update OpenClaw allowlists.
-script: scripts/module_channel_setup.sh

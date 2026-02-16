@@ -1,5 +1,6 @@
+state/
 *.log
-secrets/
-*.env
+*.tmp
+*.swp
 .DS_Store
 node_modules/

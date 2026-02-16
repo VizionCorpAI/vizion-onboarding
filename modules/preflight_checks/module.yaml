@@ -1,0 +1,3 @@
+name: preflight_checks
+description: Validate local tooling and OpenClaw configuration.
+script: scripts/module_preflight_checks.sh

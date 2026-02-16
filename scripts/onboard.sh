@@ -9,9 +9,13 @@ fi
 modules=()
 while IFS= read -r line; do
   line=$(echo "$line" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
-  if [[ $line == -* ]]; then
-    modules+=("${line#- }")
-  fi
+  case "$line" in
+    -* )
+      module_name=${line#-}
+      module_name=$(echo "$module_name" | sed 's/^[[:space:]]*//')
+      modules+=("$module_name")
+      ;;
+  esac
 done < "$profile_file"
 if [ ${#modules[@]} -eq 0 ]; then
   echo "Profile '$profile' defines no modules." >&2

@@ -2,15 +2,39 @@ profiles:
   - name: default
     description: Standard onboarding profile
     modules:
+      - preflight_checks
       - workspace_scaffold
       - agent_setup
       - channel_setup
   - name: infra
     description: Infrastructure-only profile
     modules:
+      - preflight_checks
       - workspace_scaffold
       - agent_setup
+  - name: client_full
+    description: Channels + agents for a client
+    modules:
+      - preflight_checks
+      - channel_setup
+      - agent_setup
+  - name: workspace_full
+    description: Full workspace scaffold + channels + agents
+    modules:
+      - preflight_checks
+      - workspace_scaffold
+      - agent_setup
+      - channel_setup
+  - name: full_stack
+    description: Full stack onboarding with docops follow-up
+    modules:
+      - preflight_checks
+      - workspace_scaffold
+      - agent_setup
+      - channel_setup
 modules:
+  - name: preflight_checks
+    description: Validate local tooling and OpenClaw configuration
   - name: workspace_scaffold
     description: Scaffold folders and README
   - name: agent_setup

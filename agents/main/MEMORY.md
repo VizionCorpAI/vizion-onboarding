@@ -1,7 +1,7 @@
 # MEMORY.md
 
 This file stores durable workspace memory (high-level, non-sensitive).
-Last regenerated: 2026-02-16T01:07:07Z
+Last regenerated: 2026-02-16T04:23:00Z
 
 ## Facts
 - Central orchestrator: `vizion-scheduling`
@@ -13,7 +13,7 @@ Last regenerated: 2026-02-16T01:07:07Z
 ## This Workspace
 - Key: `onboarding`
 - Agent: `onboarding`
-- Role: Onboarding control plane
+- Role: Agent Builder
 - DB prefix: `onboard_`
 - Dependencies: marketing,scheduling,trading
 

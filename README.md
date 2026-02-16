@@ -1,16 +1,22 @@
 # vizion-onboarding
 
-Workspace control plane for onboarding workflows, agents, channels, and infrastructure catalogs.
+Onboarding automation and templates for VizionAI.
 
-## Structure
-- `modules/`: atomic onboarding steps (workspace scaffolding, agent generation, channel seeding).
-- `profiles/`: module compositions (default, infra-only, client-channel deploys).
-- `templates/`: scaffolding for agents, workspaces, and n8n workflows.
-- `tasks/manifest.yaml`: declares onboarding tasks/load order.
-- `scripts/`: orchestrators (e.g., `onboard.sh`) and module helpers.
-- `workflows/n8n/`: webhook-driven flows that trigger onboarding via platform.
-- `agents/`, `infra/`, `config/`, `state/`: supporting artifacts (unchanged).
+## Secrets Standard
+All secrets use the universal label-based key format:
+`CLIENT_<CLIENTKEY>__<DOMAIN>__<KIND>__<IDENTIFIER>`
 
-## Alignment Keys
-- workspace_key: onboarding
-- workflow_namespace: onboarding
+See `docs/standards/secret_key_format.md`.
+
+## Onboarding Request
+- Schema: `docs/schemas/onboarding_request.schema.json`
+- Example: `templates/onboarding/request_example.json`
+- Runner: `scripts/onboard_request.sh`
+
+## Profiles
+Profiles support multi-channel, multi-agent, and multi-workflow requests.
+- `default`
+- `infra`
+- `client_full`
+- `workspace_full`
+- `full_stack`

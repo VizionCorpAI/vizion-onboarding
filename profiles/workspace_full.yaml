@@ -1,4 +1,4 @@
-name: default
+name: workspace_full
 modules:
   - preflight_checks
   - workspace_scaffold

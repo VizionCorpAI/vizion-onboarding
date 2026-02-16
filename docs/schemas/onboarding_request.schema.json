@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OnboardingRequest",
+  "type": "object",
+  "required": ["client"],
+  "properties": {
+    "requestId": {"type": "string"},
+    "profile": {"type": "string", "default": "default"},
+    "client": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {"type": "string"},
+        "key": {"type": "string"},
+        "aliases": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    },
+    "channels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["domain", "kind", "identifier"],
+        "properties": {
+          "domain": {"type": "string"},
+          "kind": {"type": "string"},
+          "identifier": {"type": "string"},
+          "value": {"type": "string"}
+        }
+      }
+    },
+    "agents": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "workflows": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "workspace": {
+      "type": "string",
+      "enum": ["none", "skeleton", "full"]
+    }
+  }
+}

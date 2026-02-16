@@ -1,0 +1,15 @@
+{
+  "requestId": "req_2026_02_16_long_john_silver",
+  "profile": "client_full",
+  "client": {
+    "name": "Long John Silver",
+    "key": "LONGJOHNSILVER",
+    "aliases": ["LJ", "LJS", "Long John", "Silver"]
+  },
+  "channels": [
+    {"domain": "SOCIAL", "kind": "WHATSAPP", "identifier": "PRIMARY_PHONE", "value": "+17373934343"}
+  ],
+  "agents": [],
+  "workflows": [],
+  "workspace": "none"
+}

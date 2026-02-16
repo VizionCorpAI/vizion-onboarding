@@ -1,5 +1,5 @@
-name: infra
+name: client_full
 modules:
   - preflight_checks
-  - workspace_scaffold
+  - channel_setup
   - agent_setup
