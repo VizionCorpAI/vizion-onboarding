@@ -1,0 +1,143 @@
+{
+  "name": "Workflow Deployer",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "chat/workflow-deployer",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "name": "Chat Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ],
+      "webhookId": ""
+    },
+    {
+      "parameters": {
+        "agent": "conversationalAgent",
+        "promptType": "define",
+        "text": "={ $json.message }",
+        "options": {
+          "systemMessage": "You are a workflow deployer specialist. Deploy workflows. Use the available tools to complete tasks efficiently."
+        }
+      },
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "name": "import_workflow",
+        "description": "Tool: Import Workflow",
+        "workflowId": "={{ $workflow.id }}",
+        "fields": {
+          "values": []
+        },
+        "options": {}
+      },
+      "name": "Tool: import_workflow",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 1.1,
+      "position": [
+        250,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "name": "configure_credentials",
+        "description": "Tool: Configure Credentials",
+        "workflowId": "={{ $workflow.id }}",
+        "fields": {
+          "values": []
+        },
+        "options": {}
+      },
+      "name": "Tool: configure_credentials",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 1.1,
+      "position": [
+        400,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "name": "activate_workflow",
+        "description": "Tool: Activate Workflow",
+        "workflowId": "={{ $workflow.id }}",
+        "fields": {
+          "values": []
+        },
+        "options": {}
+      },
+      "name": "Tool: activate_workflow",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 1.1,
+      "position": [
+        550,
+        500
+      ]
+    }
+  ],
+  "connections": {
+    "Chat Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Tool: import_workflow",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Tool: configure_credentials",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Tool: activate_workflow",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "AI Agent"
+    },
+    {
+      "name": "VizionAI"
+    }
+  ],
+  "triggerCount": 1,
+  "versionId": ""
+}
