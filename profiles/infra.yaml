@@ -1,5 +1,7 @@
 name: infra
+description: Infrastructure/internal workspace onboarding with no channel setup.
 modules:
   - preflight_checks
   - workspace_scaffold
   - agent_setup
+  - postflight

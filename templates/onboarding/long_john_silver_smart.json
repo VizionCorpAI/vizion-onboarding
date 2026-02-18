@@ -1,0 +1,20 @@
+{
+  "requestId": "req_2026_02_18_ljs_smart",
+  "profile": "smart_full",
+  "client": {
+    "name": "Long John Silver",
+    "key": "LONGJOHNSILVER",
+    "firstName": "Long John",
+    "lastName": "Silver",
+    "phone": "7373934343",
+    "email": "longjohn@example.com",
+    "businessType": "Pirate Operations & Treasure Management",
+    "businessDescription": "High-seas treasure acquisition, crew management, and maritime logistics",
+    "clientIps": ["107.218.137.219"],
+    "aliases": ["LJ", "LJ Silver", "Silver", "Long John", "LJS"]
+  },
+  "channels": [],
+  "agents": [],
+  "workflows": [],
+  "workspace": "none"
+}

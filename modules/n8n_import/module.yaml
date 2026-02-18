@@ -1,0 +1,3 @@
+name: n8n_import
+description: Import or update n8n workflows from WORKFLOWS_JSON or the workflows/n8n directory. Runs when workflows[] is present in the onboarding request.
+script: scripts/module_n8n_import.sh

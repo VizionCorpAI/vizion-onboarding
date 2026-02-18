@@ -1,0 +1,10 @@
+name: smart_full
+description: AI-powered smart onboarding - expands requirements intelligently, then runs full onboarding pipeline with Telegram support
+modules:
+  - ai_expand
+  - preflight_checks
+  - channel_setup
+  - telegram_setup
+  - agent_setup
+  - n8n_import
+  - postflight

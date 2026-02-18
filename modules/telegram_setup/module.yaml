@@ -1,0 +1,6 @@
+name: telegram_setup
+description: Register Telegram bots (main + client-specific), configure OpenClaw, and set up webhook routing
+script: scripts/module_telegram_setup.sh
+dependencies:
+  - preflight_checks
+optional: false

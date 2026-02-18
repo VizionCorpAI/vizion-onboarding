@@ -1,5 +1,10 @@
 name: client_full
+description: >
+  Client onboarding: preflight, channels, agents, n8n import, postflight.
+  Use for single or multi-channel client onboarding without repo scaffolding.
 modules:
   - preflight_checks
   - channel_setup
   - agent_setup
+  - n8n_import
+  - postflight

@@ -1,0 +1,3 @@
+name: postflight
+description: Auto-ingest onboarding results into learning tables, emit alert event, generate doc snapshot for full_stack profile.
+script: scripts/module_postflight.sh

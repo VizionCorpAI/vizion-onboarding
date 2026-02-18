@@ -1,0 +1,3 @@
+name: ai_expand
+description: AI-powered requirement expansion - infers channels, workflows, integrations from minimal client info using Claude API
+script: scripts/module_ai_expand.sh

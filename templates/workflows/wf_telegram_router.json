@@ -1,0 +1,180 @@
+{
+  "name": "wf_telegram_router",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "webhook/telegram",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "telegram_webhook",
+      "name": "Telegram Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract Telegram message data\nconst body = $input.item.json.body || {};\nconst message = body.message || {};\nconst from = message.from || {};\nconst chat = message.chat || {};\n\nreturn {\n  json: {\n    telegram_user_id: from.id,\n    username: from.username || 'unknown',\n    first_name: from.first_name || '',\n    last_name: from.last_name || '',\n    chat_id: chat.id,\n    message_text: message.text || '',\n    message_id: message.message_id,\n    timestamp: message.date,\n    raw_update: body\n  }\n};"
+      },
+      "id": "parse_telegram_message",
+      "name": "Parse Telegram Message",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "route_by_user_id",
+              "leftValue": "={{ $json.telegram_user_id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "identify_client",
+      "name": "Identify Client",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://127.0.0.1:48950/api/v1/telegram/route",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json }}",
+        "options": {}
+      },
+      "id": "route_to_openclaw",
+      "name": "Route to OpenClaw",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [850, 200]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { ok: true, result: 'Message processed' } }}"
+      },
+      "id": "respond_success",
+      "name": "Respond Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1050, 200]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { ok: false, error: 'Unknown user' } }}",
+        "options": {
+          "responseCode": 403
+        }
+      },
+      "id": "respond_unauthorized",
+      "name": "Respond Unauthorized",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [850, 400]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Log to learning system\nconst data = $input.item.json;\n\nreturn {\n  json: {\n    event_type: 'telegram_message_received',\n    client_key: data.client_key || 'UNKNOWN',\n    user_id: data.telegram_user_id,\n    message: data.message_text,\n    timestamp: new Date().toISOString()\n  }\n};"
+      },
+      "id": "log_to_learning",
+      "name": "Log to Learning System",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1050, 400]
+    }
+  ],
+  "connections": {
+    "Telegram Webhook": {
+      "main": [
+        [
+          {
+            "node": "Parse Telegram Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Telegram Message": {
+      "main": [
+        [
+          {
+            "node": "Identify Client",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Identify Client": {
+      "main": [
+        [
+          {
+            "node": "Route to OpenClaw",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond Unauthorized",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route to OpenClaw": {
+      "main": [
+        [
+          {
+            "node": "Respond Success",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Log to Learning System",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2026-02-18T00:00:00.000Z",
+      "updatedAt": "2026-02-18T00:00:00.000Z",
+      "id": "telegram",
+      "name": "telegram"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2026-02-18T00:00:00.000Z",
+  "versionId": "1"
+}

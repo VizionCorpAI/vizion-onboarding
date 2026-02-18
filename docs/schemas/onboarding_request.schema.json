@@ -12,6 +12,16 @@
       "properties": {
         "name": {"type": "string"},
         "key": {"type": "string"},
+        "firstName": {"type": "string"},
+        "lastName": {"type": "string"},
+        "email": {"type": "string", "format": "email"},
+        "phone": {"type": "string"},
+        "businessType": {"type": "string"},
+        "businessDescription": {"type": "string"},
+        "clientIps": {
+          "type": "array",
+          "items": {"type": "string", "format": "ipv4"}
+        },
         "aliases": {
           "type": "array",
           "items": {"type": "string"}

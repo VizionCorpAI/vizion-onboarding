@@ -1,6 +1,11 @@
 name: workspace_full
+description: >
+  Full workspace onboarding: preflight, scaffold, agents, channels, n8n import, postflight.
+  Use for new workspaces with agents and optional channels.
 modules:
   - preflight_checks
   - workspace_scaffold
   - agent_setup
   - channel_setup
+  - n8n_import
+  - postflight

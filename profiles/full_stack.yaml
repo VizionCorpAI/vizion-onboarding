@@ -1,6 +1,11 @@
 name: full_stack
+description: >
+  Full onboarding: preflight, workspace scaffold, agents, channels, n8n workflows, postflight learning + doc snapshot.
+  Supports multi-channel, multi-agent, multi-workflow in a single request.
 modules:
   - preflight_checks
   - workspace_scaffold
   - agent_setup
   - channel_setup
+  - n8n_import
+  - postflight
