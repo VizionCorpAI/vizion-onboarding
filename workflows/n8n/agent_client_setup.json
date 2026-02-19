@@ -2,37 +2,104 @@
   "name": "Client Setup",
   "nodes": [
     {
+      "id": "20c952f0-d7b4-4e72-bc68-fcca44b4b2e3",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        260,
+        300
+      ],
       "parameters": {
         "httpMethod": "POST",
         "path": "chat/client-setup",
         "responseMode": "responseNode",
         "options": {}
-      },
-      "name": "Webhook",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        250,
-        300
-      ]
+      }
     },
     {
+      "id": "300f7e91-7372-4ec3-8fe9-6db43c508f34",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        560,
+        300
+      ],
       "parameters": {
-        "respondWith": "json",
-        "responseBody": "={{ JSON.stringify($json) }}",
-        "options": {}
+        "agent": "conversationalAgent",
+        "promptType": "define",
+        "text": "={{ $json.body?.message || $json.message || $json.body?.text || 'Hello' }}",
+        "options": {
+          "systemMessage": "You are a client onboarding AI. Guide new client setup end-to-end: credential collection, workspace configuration, agent deployment, and handoff verification. Ensure nothing is missed."
+        }
+      }
+    },
+    {
+      "id": "534758db-3b34-4d29-b850-037699efe1ef",
+      "name": "OpenRouter Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        560,
+        540
+      ],
+      "parameters": {
+        "model": "anthropic/claude-sonnet-4-5",
+        "options": {
+          "maxTokens": 1500,
+          "temperature": 0.3
+        }
       },
+      "credentials": {
+        "openRouterApi": {
+          "id": "9a8L86PX0yHKHdfY",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "id": "dadeab5f-5608-4f77-88ab-de96002b109e",
       "name": "Respond to Webhook",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        450,
+        860,
         300
-      ]
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ response: $json.output || $json.text || $json, model: \"anthropic/claude-sonnet-4-5\", tier: 3, workspace: \"onboarding\", agent: \"client_setup\" }) }}",
+        "options": {
+          "responseCode": 200
+        }
+      }
     }
   ],
   "connections": {
     "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
       "main": [
         [
           {
@@ -45,6 +112,10 @@
     }
   },
   "settings": {
-    "executionOrder": "v1"
-  }
+    "executionOrder": "v1",
+    "saveManualExecutions": false,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "tags": []
 }
