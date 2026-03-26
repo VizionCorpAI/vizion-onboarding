@@ -13,8 +13,18 @@ REQUIRED_SKILLS=${OPENCLAW_REQUIRED_SKILLS:-vizion-platform,vizion-onboarding,vi
 warn() {
   local msg="$*"
   echo "WARNING: ${msg}" >&2
-  if [ "${LEARN_LOG_WARNINGS:-1}" = "1" ]; then
-    fp=$(printf '%s' "${msg}" | tr '[:upper:]' '[:lower:]' | tr -c '[:alnum:]' '_' | cut -c1-80)
+  fp=$(printf '%s' "${msg}" | tr '[:upper:]' '[:lower:]' | tr -c '[:alnum:]' '_' | cut -c1-80)
+  if command -v /root/VizionAI/WORKSPACES/vizion-infra/scripts/report_openclaw_issue.sh >/dev/null 2>&1; then
+    /root/VizionAI/WORKSPACES/vizion-infra/scripts/report_openclaw_issue.sh \
+      --title "OpenClaw preflight issue" \
+      --summary "${msg}" \
+      --source-ref "openclaw_verify_${fp}" \
+      --severity high \
+      --tags "openclaw,preflight,issue" \
+      --details "${msg}" \
+      --workspace "vizion-onboarding" \
+      --promote || true
+  elif [ "${LEARN_LOG_WARNINGS:-1}" = "1" ]; then
     /root/VizionAI/WORKSPACES/vizion-onboarding/scripts/learning_signal.sh "onboarding_preflight_${fp}" "onboarding_preflight" "${msg}" "high" '{"module":"openclaw_verify"}' || true
   fi
   if [ "$STRICT_MODE" = "1" ]; then

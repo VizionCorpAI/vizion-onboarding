@@ -31,6 +31,12 @@ Set `STRICT_MODE=1` to fail the onboarding if any check is invalid.
 
 Set `N8N_URL` if n8n is not on `http://127.0.0.1:5678`.
 
+## n8n access standard
+- If `N8N_API_KEY` is not already set, load it from Infisical using universal auth.
+- Source of truth: `vizion-infrastructure` project, path `/platform/n8n`, secret `N8N_API_KEY`
+- Use the provisioner or runtime Infisical identity to authenticate
+- Do not overwrite any existing workflow description when publishing or updating a workflow
+
 ## Running
 ```bash
 CLIENT_NAME="Long John Silver" \

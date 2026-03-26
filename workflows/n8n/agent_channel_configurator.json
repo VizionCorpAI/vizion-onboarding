@@ -117,5 +117,6 @@
     "callerPolicy": "workflowsFromSameOwner"
   },
   "staticData": null,
-  "tags": []
+  "tags": [],
+  "description": "Workflow workflow for Channel Configurator."
 }

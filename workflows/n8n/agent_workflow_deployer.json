@@ -31,7 +31,7 @@
         "promptType": "define",
         "text": "={{ $json.body?.message || $json.message || $json.body?.text || 'Hello' }}",
         "options": {
-          "systemMessage": "You are a workflow deployment AI. Validate and deploy n8n workflows, check for conflicts, verify webhook paths, and confirm successful activation."
+          "systemMessage": "You are a workflow deployment AI. Validate and deploy n8n workflows, check for conflicts, verify webhook paths, and confirm successful activation. Standardize every published workflow by adding a short context description only when missing, enabling MCP for the workflow, and leaving the workflow active after publish. If N8N_API_KEY is not already present, load it from Infisical via universal auth from the infrastructure project path /platform/n8n."
         }
       }
     },
@@ -117,5 +117,6 @@
     "callerPolicy": "workflowsFromSameOwner"
   },
   "staticData": null,
-  "tags": []
+  "tags": [],
+  "description": "Workflow workflow for Workflow Deployer."
 }
