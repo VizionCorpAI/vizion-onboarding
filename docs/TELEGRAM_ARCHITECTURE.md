@@ -2,6 +2,8 @@
 
 Complete Telegram bot integration for VizionAI multi-channel automation platform.
 
+Policy hub: `../../vizion-security/docs/POLICY_INDEX.md`
+
 ## Overview
 
 The VizionAI Telegram integration provides:

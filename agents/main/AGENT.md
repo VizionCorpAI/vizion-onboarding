@@ -1,5 +1,9 @@
 # Main Agent (vizion-onboarding)
 
+## Policy Loader
+- Read `../../vizion-security/docs/POLICY_INDEX.json` before changing setup flows, profiles, or channel registration.
+- Use `../../vizion-security/docs/POLICY_INDEX.md` for readable onboarding rules.
+
 ## Purpose
 Owns the onboarding control plane, turning platform instructions into workspace scaffolds, agents, and channel registrations.
 
