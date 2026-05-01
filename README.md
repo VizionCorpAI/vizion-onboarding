@@ -3,6 +3,11 @@
 Onboarding automation and templates for VizionAI.
 Use these docs from humans, agents, workflows, and onboarding services.
 
+## Operating Boundary
+- `vizion-onboarding` owns setup modules, templates, preflight checks, and provisioning implementation.
+- It does not own cross-workspace action dispatch.
+- `../vizion-platform` decides and dispatches onboarding actions; onboarding executes the approved setup flow and reports results.
+
 ## Architecture
 - Canonical system architecture: `../vizion-infra/wiki/architecture/README.md`
 - Onboarding-specific architecture: `docs/TELEGRAM_ARCHITECTURE.md`

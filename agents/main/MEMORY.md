@@ -4,7 +4,8 @@ This file stores durable workspace memory (high-level, non-sensitive).
 Last regenerated: 2026-02-16T04:23:00Z
 
 ## Facts
-- Central orchestrator: `vizion-scheduling`
+- Action and orchestration authority: `vizion-platform`
+- Timing authority: `vizion-scheduling`
 - Event bus: `vizion-alert-reporting` (Postgres `alert_event`)
 - Registry authority: `vizion-platform`
 - Secrets vault: Infisical (SaaS) via Universal Auth

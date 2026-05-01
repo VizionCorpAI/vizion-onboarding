@@ -2,7 +2,7 @@
 
 ## Preferences
 - Keep actions deterministic and auditable (logs/events)
-- Default to central scheduling (vizion-scheduling) for recurring work
+- Route actions through `vizion-platform`; use `vizion-scheduling` only for recurring timing
 - Use alert-reporting as the event bus for cross-workspace communication
 
 ## Safety
